@@ -1,6 +1,6 @@
 from flask import Flask, request, abort, jsonify
 from wct_app.config.wct_config import WCT_VERSION
-from wct_app.lib.new_widgetizer.widgetizer import NewWidgetizer as Widgetizer
+from wct_app.lib.widgetizer.widgetizer import Widgetizer
 
 
 APP = Flask(__name__)
@@ -9,6 +9,9 @@ APP = Flask(__name__)
 def widgetize():
 
     to_widgetize = request.get_json(force=True)
+
+    if not to_widgetize:
+        abort(400)
 
     if not to_widgetize.get('widget_material', None):
         abort(400)
