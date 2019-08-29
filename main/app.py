@@ -1,6 +1,6 @@
 from flask import Flask, request, abort, jsonify
 from wct_app.config.wct_config import WCT_VERSION
-from wct_app.lib.widgetizer.widgetizer import Widgetizer
+from wct_app.lib.new_widgetizer.widgetizer import NewWidgetizer as Widgetizer
 
 
 APP = Flask(__name__)

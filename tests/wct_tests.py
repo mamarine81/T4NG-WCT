@@ -12,7 +12,14 @@ def client():
 
 ROUTE = '/api/v0/widgetize'
 
-def test_response(client):
+def test_good_payload(client):
     r = client.post(ROUTE, data=json.dumps({'widget_material': 'foo'}))
     data = r.get_json()
     assert r.status_code == 200
+    assert 'wct_version' in data.keys()
+    assert 'widget' in data.keys()
+    assert '(ಠ_ಠ)' in data.get('widget', '')
+
+def test_bad_payload(client):
+    r = client.post(ROUTE, data=json.dumps({'bad_material': 'foo'}))
+    assert r.status_code == 400
